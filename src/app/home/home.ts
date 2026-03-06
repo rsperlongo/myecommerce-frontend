@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { MatGridList } from '@angular/material/grid-list';
+import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [MatGridList],
+  imports: [MatGridListModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

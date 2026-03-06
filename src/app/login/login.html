@@ -1,1 +1,27 @@
-<p>tela login</p>
+<div class="login-wrapper">
+  <mat-card class="login-card">
+    <h1>Login</h1>
+    <form >
+      <mat-card-content>
+        <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput [formControl]="email" placeholder="exemplo@email.com" (blur)="updateErrorMessage()" required />
+        @if (email.invalid) {
+          <mat-error>{{ errorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput [formControl]="password" type="password" placeholder="Digite sua senha" (blur)="updateErrorMessage2()" required />
+        @if (password.invalid) {
+          <mat-error>{{ errorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" [disabled]="email.invalid || password.invalid">Login</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

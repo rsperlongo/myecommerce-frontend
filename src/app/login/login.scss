@@ -1,0 +1,17 @@
+.login-wrapper {
+  display: flex;          /* Ativa o modo Flexbox */
+  justify-content: center; /* Alinha horizontalmente (eixo X) */
+  align-items: center;     /* Alinha verticalmente (eixo Y) */
+
+  width: 100vw;           /* 100% da largura da viewport */
+  height: 100vh;          /* 100% da altura da viewport */
+
+  background-color: #fafafa; /* Um cinza bem claro para destacar o card */
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;       /* Impede que o card fique largo demais em telas grandes */
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra suave para profundidade */
+}

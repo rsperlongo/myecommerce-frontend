@@ -31,7 +31,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './login.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
+
 export class Login {
+  loading = signal(false);
+  submitted = signal(false);
+
   readonly email = new FormControl('', [Validators.required, Validators.email]);
   readonly password = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
@@ -45,14 +50,20 @@ export class Login {
       this.password.valueChanges,
     )
       .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateErrorMessage())
+      .subscribe(() => this.updateErrorMessage());
   }
+
 
   updateErrorMessage() {
     if (this.email.hasError('required')) {
       this.errorMessage.set('You must enter a value');
     } else if (this.email.hasError('email')) {
       this.errorMessage.set('Not a valid email');
+    }
+    if (this.password.hasError('required')) {
+      this.errorMessage.set('You must enter a value');
+    } else if (this.password.hasError('minlength')) {
+      this.errorMessage.set('Password must be at least 6 characters long');
     }
   }
 
@@ -61,6 +72,19 @@ export class Login {
       this.errorMessage.set('You must enter a value');
     } else if (this.password.hasError('minlength')) {
       this.errorMessage.set('Password must be at least 6 characters long');
+    }
+  }
+
+  login() {
+    if (this.email.valid && this.password.valid) {
+      this.loading.set(true);
+      if (this.submitted()) {
+        return;
+      }
+      this.submitted.set(true);
+      console.log('Logging in with', this.email.value, this.password.value);
+    } else {
+      this.updateErrorMessage();
     }
   }
 }

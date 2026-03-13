@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
-import { RouterOutlet } from '@angular/router';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { Header } from "../components/header/header";
+import { Footer } from "../components/footer/footer";
+import { Sidenav } from "../components/sidenav/sidenav";
 
 @Component({
   selector: 'app-home',
-  imports: [MatGridListModule, Header],
+  imports: [MatGridListModule, Header, Footer, Sidenav],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

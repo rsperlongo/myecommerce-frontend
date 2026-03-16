@@ -1,4 +1,24 @@
+@use '@angular/material' as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.card-overrides((
+    elevated-container-color: orange,
+    elevated-container-elevation: red,
+  ));
+}
+
 .tile-content {
-  padding: 16px;
+  padding: 20px;
   text-align: center;
+}
+
+.example-card {
+  max-width: 300px;
+  max-height: 470px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.dev/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }

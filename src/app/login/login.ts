@@ -12,8 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { email, FormField } from '@angular/forms/signals';
-import { merge, takeUntil } from 'rxjs';
+import { merge } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -89,7 +88,7 @@ export class Login {
       this.submitted.set(true);
       this.errorMessage.set('');
 
-      // Use mock login for now
+      // mock login for demo purposes (replace with real API call when ready)
       this.authService.mockLogin({ email: this.email.value!, password: this.password.value! }).subscribe({
         next: () => {
           this.loading.set(false);

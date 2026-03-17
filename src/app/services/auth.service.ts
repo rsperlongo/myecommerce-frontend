@@ -13,21 +13,18 @@ const httpOptions = {
 export class AuthService {
   private http = inject(HttpClient);
   private readonly TOKEN_KEY = 'auth_token';
-  private readonly API_URL = 'https://api.example.com'; // Replace with actual API
+  private readonly API_URL = 'https://api.example.com';
 
-  // Signal for authentication state
+
   isAuthenticated = signal(false);
 
-  // BehaviorSubject for current user (optional, if needed)
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
   constructor() {
-    // Check if token exists on init
     const token = this.getToken();
     if (token) {
       this.isAuthenticated.set(true);
-      // Optionally decode user from token
     }
   }
 
@@ -37,7 +34,6 @@ export class AuthService {
         if (response.token) {
           localStorage.setItem(this.TOKEN_KEY, response.token);
           this.isAuthenticated.set(true);
-          // Decode and set user if needed
         }
       })
     );

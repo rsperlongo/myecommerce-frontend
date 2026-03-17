@@ -12,4 +12,8 @@
    <button matButton>
     <mat-icon aria-hidden="false" aria-label="Cart" fontIcon="shopping_cart"></mat-icon>
    </button>
+
+   @if (authService.isAuthenticated()) {
+     <button matButton (click)="logout()">Logout</button>
+   }
 </mat-toolbar>

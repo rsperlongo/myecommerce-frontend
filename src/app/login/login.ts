@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -15,6 +15,8 @@ import {
 import { email, FormField } from '@angular/forms/signals';
 import { merge, takeUntil } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -34,6 +36,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 export class Login {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   loading = signal(false);
   submitted = signal(false);
 
@@ -82,7 +87,21 @@ export class Login {
         return;
       }
       this.submitted.set(true);
-      console.log('Logging in with', this.email.value, this.password.value);
+      this.errorMessage.set('');
+
+      // Use mock login for now
+      this.authService.mockLogin({ email: this.email.value!, password: this.password.value! }).subscribe({
+        next: () => {
+          this.loading.set(false);
+          this.submitted.set(false);
+          this.router.navigate(['/home']);
+        },
+        error: (err) => {
+          this.loading.set(false);
+          this.submitted.set(false);
+          this.errorMessage.set(err.message || 'Login failed');
+        }
+      });
     } else {
       this.updateErrorMessage();
     }
